@@ -1,6 +1,7 @@
 package com.tang4j.core.util;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
@@ -100,13 +101,56 @@ public class GenerateCodeUtil {
         templateConfig.setEntity("templates/entity.java.vm");
         templateConfig.setController("templates/controller.java.vm");
 
+        //校验规则配置（这是模拟数据）
+        String validRulesJSONStr = "{\n" +
+                "\n" +
+                "\t\"nickname\": [{\n" +
+                "\t\t\t\"name\": \"nickname\"\n" +
+                "\t\t}, {\n" +
+                "\t\t\t\"required\": true,\n" +
+                "\t\t\t\"message\": \"缺少field1参数\"\n" +
+                "\t\t},\n" +
+                "\t\t{\n" +
+                "\t\t\t\"min\": 5,\n" +
+                "\t\t\t\"max\": 10,\n" +
+                "\t\t\t\"message\": \"长度必须满足5-10个字符\"\n" +
+                "\t\t},\n" +
+                "\t\t{\n" +
+                "\t\t\t\"regex\": \"\",\n" +
+                "\t\t\t\"message\": \"日期格式不正确\"\n" +
+                "\t\t}\n" +
+                "\t],\n" +
+                "\t\"field2\": [{\n" +
+                "\t\t\t\"name\": \"field2\"\n" +
+                "\t\t}, {\n" +
+                "\t\t\t\"required\": true,\n" +
+                "\t\t\t\"message\": \"缺少field2参数\"\n" +
+                "\t\t},\n" +
+                "\t\t{\n" +
+                "\t\t\t\"min\": 5,\n" +
+                "\t\t\t\"max\": 10,\n" +
+                "\t\t\t\"message\": \"长度必须满足5-10个字符\"\n" +
+                "\t\t},\n" +
+                "\t\t{\n" +
+                "\t\t\t\"regex\": \"\",\n" +
+                "\t\t\t\"message\": \"身份证号格式不正确\"\n" +
+                "\t\t}\n" +
+                "\t]\n" +
+                "\n" +
+                "}";
+        JSONObject validRules = JSONObject.parseObject(validRulesJSONStr);
+
+
         InjectionConfig injectionConfig = new InjectionConfig() {
             @Override
             public void initMap() {
                 Map<String, Object> map = new HashMap<>();
-                //自定义配置，在模版中cfg.superColums 获取
+                //自定义配置，在模版中cfg.superColumns 获取
                 // TODO 这里解决子类会生成父类属性的问题，在模版里会用到该配置
                 map.put("superColumns", superEntityColumns);
+                //字段校验规则,，在模版中cfg.validRules 获取
+                // TODO 这里解决字段校验规则，在模版里会用到该配置
+                map.put("validRules", validRules);
                 this.setMap(map);
             }
         };

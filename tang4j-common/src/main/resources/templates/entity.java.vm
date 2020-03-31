@@ -1,5 +1,7 @@
 package ${package.Entity};
 
+${cfg.validRules.nickname[0]}
+
 #if(${activeRecord})
 import com.baomidou.mybatisplus.activerecord.Model;
 #end
@@ -14,6 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.hibernate.validator.constraints.Length;
 
 #end
 
@@ -100,6 +103,14 @@ private static final long serialVersionUID=1L;
     #if(${logicDeleteFieldName}==${field.name})
     @TableLogic
     #end
+## 校验注解
+        #foreach($validRule in ${cfg.validRules})
+            #if(${validRule[0].name}==${field.name})
+            @NotBlank(message = "${field.name}必填")
+            @Size(min = ${validRule[2].min},max = ${validRule[2].max},
+                    message = "${field.name}的长度范围为${validRule[2].min}-${validRule[2].max}")
+            #end
+        #end
     private ${field.propertyType} ${field.propertyName} ;
     #end
 #end
