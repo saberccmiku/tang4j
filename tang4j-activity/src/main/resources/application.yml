@@ -1,0 +1,94 @@
+
+spring:
+  datasource:
+  # 数据源基本配置
+    username: root
+    password: passw0rd
+    url: jdbc:mysql://localhost:3306/tang4j_flow?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT&nullCatalogMeansCurrent=true
+
+#    username: root
+#    password: passw0rd
+#    url: jdbc:mysql://localhost:3306/tang4j_flow?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # 数据源其他配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+    # SQLException: XAER_INVAL: Invalid arguments (or unsupported command)问题
+#    xa:
+#      properties:
+#        pinGlobalTxToPhysicalConnection: true
+#        useServerPrepStmts: true
+
+  thymeleaf:
+    mode: HTML
+    encoding: utf-8
+    # 禁用缓存
+    cache: false
+  application:
+    # 注册应用名
+    name: tang-activity
+  mvc:
+    # 静态资源路径
+    static-path-pattern: /static/**,/webjars/**
+  activiti:
+    # 自动建表
+    database-schema: tang4j_flow
+    database-schema-update: true
+    history-level: full
+    db-history-used: true
+
+# JWT 配置
+jwt:
+  # 存放Token的Header Key
+  tokenHeader: Authorization
+    # 密匙key
+  secret: mySecret
+  authHeader: authorities
+  # 自定义token 前缀字符
+  tokenPrefix: Bearer-
+  # 过期时间   单位秒 7天后过期  604800
+  tokenExpire: 3600
+  # 超时时间   单位秒
+  accessToken: 3600
+  # 刷新token时间   单位秒
+  refreshToken: 3600
+
+  antMatchers: /**,/demo/**,/asserts/**,/security/noauth,/
+                /swagger/**,/webjars/**,/swagger-resources/**,/
+                /v2/api-docs,/**/*.html,/exception/**,/lombok,/mybatis/**,/redis/**,/
+                /security/login,/security/logout
+  route:
+    authentication:
+      path: login/entry
+      refresh: oauth/refresh
+      register: login/account
+
+# 日志
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tang4j.mapper.SysAdminMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tang4j.model.SysAdmin">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="nickname" property="nickname"/>
+        <result column="password" property="password"/>
+        <result column="salt" property="salt"/>
+        <result column="avatar" property="avatar"/>
+        <result column="email" property="email"/>
+        <result column="login_ip" property="loginIp"/>
+        <result column="login_failure" property="loginFailure"/>
+        <result column="login_time" property="loginTime"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="delete_date" property="deleteDate"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="delete_by" property="deleteBy"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        <trim suffixOverrides=",">
+
+            T.id AS id,
+
+            T.username AS username,
+
+            T.nickname AS nickname,
+
+            T.password AS password,
+
+            T.salt AS salt,
+
+            T.avatar AS avatar,
+
+            T.email AS email,
+
+            T.login_ip AS loginIp,
+
+            T.login_failure AS loginFailure,
+
+            T.login_time AS loginTime,
+
+            T.create_date AS createDate,
+
+            T.update_date AS updateDate,
+
+            T.delete_date AS deleteDate,
+
+            T.create_by AS createBy,
+
+            T.update_by AS updateBy,
+
+            T.delete_by AS deleteBy,
+        </trim>
+    </sql>
+
+
+    <!-- 通用查询queryList -->
+    <select id="queryList" parameterType="com.tang4j.model.SysAdmin" resultType="com.tang4j.model.SysAdmin">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_admin T
+        <if test="ew.emptyOfWhere == false">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
+
+
+</mapper>

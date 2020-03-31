@@ -1,0 +1,19 @@
+spring:
+  # 数据源 配置
+  datasource:
+#    url: jdbc:oracle:thin:@localhost:1521:orcl
+#    username: docadmin
+#    password: passw0rd
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: docadmin
+    password: passw0rd
+    url: jdbc:mysql://localhost:3306/tang4j?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 10
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000

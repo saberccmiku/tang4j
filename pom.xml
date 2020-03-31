@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.0.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <packaging>pom</packaging>
+    <groupId>com.tang4j</groupId>
+    <artifactId>tang4j</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>tang4j</name>
+    <description>Demo project for Spring Boot</description>
+
+    <modules>
+        <module>tang4j-common</module>
+        <module>tang4j-core</module>
+        <module>tang4j-facade</module>
+        <module>tang4j-service</module>
+        <module>tang4j-security</module>
+        <module>tang4j-web</module>
+        <module>tang4j-generator</module>
+        <module>tang4j-activity</module>
+        <module>tang4j-socket</module>
+    </modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <!-- 数据库驱动版本号 -->
+        <oracle-jdbc.version>11.2.0.3</oracle-jdbc.version>
+        <!-- Api接口文档生成工具 -->
+        <springfox-swagger.version>2.9.2</springfox-swagger.version>
+        <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
+        <!-- mybatis版本号 -->
+        <mybatis.version>3.5.3</mybatis.version>
+        <mybatis-spring.version>2.0.3</mybatis-spring.version>
+        <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <apache-velocity.version>1.7</apache-velocity.version>
+        <!-- Java高性能反射工具包 -->
+        <esotericsoftware-reflectasm.version>1.11.9</esotericsoftware-reflectasm.version>
+        <!--阿里巴巴JSON工具包-->
+        <alibaba-fastjson.version>1.2.62</alibaba-fastjson.version>
+        <!--apache commons-->
+        <commons-beanutils.version>1.9.3</commons-beanutils.version>
+        <!--security-jwt-->
+        <spring-security-jwt.version>1.0.11.RELEASE</spring-security-jwt.version>
+        <!--j jwt-->
+        <jjwt.version>0.9.0</jjwt.version>
+        <!--工作流-->
+        <activiti.version>5.22.0</activiti.version>
+
+        <start-class>com.tang4j.Tang4jWebApplication</start-class>
+
+    </properties>
+
+    <dependencies>
+        <!--spring-boot-starter start-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- spring-security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <!--spring-boot-starter end-->
+
+        <!-- spring-security-jwt-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+            <version>${spring-security-jwt.version}</version>
+        </dependency>
+        <!-- json jwt-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+
+        <!--热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.cloud</groupId>-->
+        <!--<artifactId>spring-cloud-starter-config</artifactId>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--数据库配置-->
+        <!--<dependency>-->
+            <!--<groupId>com.hynnet</groupId>-->
+            <!--<artifactId>oracle-driver-ojdbc</artifactId>-->
+            <!--<version>12.1.0.2</version>-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.slf4j</groupId>-->
+                    <!--<artifactId>slf4j-log4j12</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${oracle-jdbc.version}</version>
+            <type>pom</type>
+        </dependency>
+
+
+        <!--使用mysql数据库,导入mysql驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <!-- 这是mybatis-plus依赖 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <!-- 这是mybatis-plus的代码自动生成器 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>${apache-velocity.version}</version>
+        </dependency>
+
+        <!-- swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${findbugs-annotations.version}</version>
+        </dependency>
+        <!--apache commons-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${commons-beanutils.version}</version>
+        </dependency>
+
+
+        <!-- Java高性能反射工具包 -->
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>reflectasm</artifactId>
+            <version>${esotericsoftware-reflectasm.version}</version>
+        </dependency>
+
+        <!-- alibaba工具包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${alibaba-fastjson.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.tang4j</groupId>
+                <artifactId>tang4j-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tang4j</groupId>
+                <artifactId>tang4j-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tang4j</groupId>
+                <artifactId>tang4j-facade</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tang4j</groupId>
+                <artifactId>tang4j-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tang4j</groupId>
+                <artifactId>tang4j-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tang4j</groupId>
+                <artifactId>tang4j-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tang4j</groupId>
+                <artifactId>tang4j-generator</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tang4j</groupId>
+                <artifactId>tang4j-activity</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tang4j</groupId>
+                <artifactId>tang4j-socket</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--<build>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    <!--</build>-->
+
+</project>

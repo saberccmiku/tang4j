@@ -1,0 +1,86 @@
+spring:
+  # 数据源 配置
+  datasource:
+#    url: jdbc:oracle:thin:@localhost:1521:orcl
+#    username: docadmin
+#    password: passw0rd
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: xinyou_jl
+    password: 9Smnjek2n^cLA1m!*yQItLFhI%3XkKlg
+    url: jdbc:mysql://rm-uf6561vpwh525p3e1qo.mysql.rds.aliyuncs.com:3306/youxin?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 10
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+  thymeleaf:
+    cache: false
+
+  # redis 配置
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 0
+    jedis:
+      pool:
+        max-active: 8 #最大连接数
+        max-idle: 8 #最大空闲数
+        max-wait: -1ms #最大阻塞等待时间(负数表示没限制)
+        min-idle: 0 #最小空闲
+    timeout: 10000ms #连接超时时间
+  jackson:
+    default-property-inclusion: non_null #设置序列化规则，不能允许为空，当value为null时，key不进行序列化,减少带宽占用
+
+mybatis-plus:
+  mapper-locations: mapper/**/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  servlet:
+    context-path: /tang4j
+  port: 9090
+  max-http-header-size: 65546
+
+# JWT 配置
+jwt:
+  # 存放Token的Header Key
+  tokenHeader: Authorization
+    # 密匙key
+  secret: mySecret
+  authHeader: authorities
+  # 自定义token 前缀字符
+  tokenPrefix: Bearer-
+  # 过期时间   单位秒 7天后过期  604800
+  tokenExpire: 3600
+  # 超时时间   单位秒
+  accessToken: 3600
+  # 刷新token时间   单位秒
+  refreshToken: 3600
+
+  md5Key: randomKey      #md5加密混淆key
+
+  antMatchers: /,/asserts/**,/security/noauth,/
+                /swagger/**,/webjars/**,/swagger-resources/**,/
+                /v2/api-docs,/**/*.html,/exception/**,/lombok,/mybatis/**,/redis/**,/security/login,/security/logout
+  route:
+    authentication:
+      path: login/entry
+      refresh: oauth/refresh
+      register: login/account
+
+# 日志
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+
+
+
+
