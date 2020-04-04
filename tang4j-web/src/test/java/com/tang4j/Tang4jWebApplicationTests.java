@@ -9,6 +9,7 @@ import com.tang4j.core.service.impl.AbstractServiceImpl;
 import com.tang4j.core.support.GenerateConfig;
 import com.tang4j.core.util.GenerateCodeUtil;
 import com.tang4j.model.SysAdmin;
+import com.tang4j.role.RoleEnum;
 import com.tang4j.service.SysAdminService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,16 @@ class Tang4jWebApplicationTests {
         sysAdmin.setPassword(new BCryptPasswordEncoder().encode("123456"));
         sysAdmin.setId("1");
         sysAdminService.update(sysAdmin);
+    }
+
+
+    /**
+     * 枚举权限
+     */
+
+    @Test
+    void testRoleEnum() {
+        RoleEnum.valueOf("ROLE_ROOT_ADMIN").op();
     }
 
 
